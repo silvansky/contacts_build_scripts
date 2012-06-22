@@ -43,13 +43,15 @@ do
 		echo "${HELP_MSG}"
 		exit 0
 	fi
-	if [[ "$ARG" == "--no-x264" ]] ; then BUILD_X264=false; fi; continue
-	if [[ "$ARG" == "--no-ffmpeg" ]] ; then BUILD_FFMPEG=false; fi; continue
-	if [[ "$ARG" == "--no-sdl" ]] ; then BUILD_SDL=false; fi; continue
-	if [[ "$ARG" == "--no-ilbc" ]] ; then BUILD_ILBC=false; fi; continue
-	if [[ "$ARG" == "--no-gsm" ]] ; then BUILD_GSM=false; fi; continue
-	if [[ "$ARG" == "--no-dbus" ]] ; then BUILD_DBUS=false; fi; continue
-	if [[ "$ARG" == "--no-install" ]] ; then INSTALL_LIBS=false; fi; continue
+	if [[ "$ARG" == "--no-x264" ]] ; then BUILD_X264=false; continue; fi
+	if [[ "$ARG" == "--no-ffmpeg" ]] ; then BUILD_FFMPEG=false; continue; fi
+	if [[ "$ARG" == "--no-sdl" ]] ; then BUILD_SDL=false; continue; fi
+	if [[ "$ARG" == "--no-ilbc" ]] ; then BUILD_ILBC=false; continue; fi
+	if [[ "$ARG" == "--no-gsm" ]] ; then BUILD_GSM=false; continue; fi
+	if [[ "$ARG" == "--no-dbus" ]] ; then BUILD_DBUS=false; continue; fi
+	if [[ "$ARG" == "--no-install" ]] ; then INSTALL_LIBS=false; continue; fi
+
+	echo "None"
 done
 
 echo "PJ SIP dependencies: x264, ffmpeg, SDL, iLBC, GSM, DBus"
@@ -89,7 +91,8 @@ then
 
 	cd x264/
 
-	./configure --enable-static --disable-thread --disable-asm --disable-cli
+	./configure --enable-static --disable-thread --disable-cli
+	# --disable-asm
 	RES=$?; CEC $RES
 
 	make
@@ -120,7 +123,9 @@ then
 	git checkout ${FFMPEG_TAG}
 	RES=$?; CEC $RES
 
-	./configure --enable-static --disable-shared --enable-memalign-hack --enable-gpl --enable-libx264 --cc=clang --disable-ssse3 --disable-amd3dnow --disable-amd3dnowext --extra-ldflags=-L/usr/local/lib --disable-asm --disable-doc --enable-avconv
+	./configure --enable-static --disable-shared --enable-memalign-hack --enable-gpl --enable-libx264 --cc=clang --extra-ldflags=-L/usr/local/lib --disable-doc --enable-avconv
+	#--disable-ssse3 --disable-amd3dnow --disable-amd3dnowext --disable-asm
+
 	RES=$?; CEC $RES
 
 	make
