@@ -21,7 +21,7 @@ fi
 
 PJ_CONFIG="pjlib/include/pj/config_site.h"
 PJ_CONFIG_FLAGS="--with-sdl=/usr/local --with-ffmpeg=/usr/local --with-x264=/usr/local"
-EXTRA_LD_FLAGS="-framework VideoDecodeAcceleration"
+EXTRA_LD_FLAGS="-framework VideoDecodeAcceleration -framework CoreAudio -framework Foundation"
 
 rm -rf ${PJ_DIR}
 
