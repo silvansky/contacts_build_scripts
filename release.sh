@@ -26,6 +26,7 @@ if [ "$VER" == "all" ]
 then
 	BUILD_VOIP=true
 	BUILD_TRUNK=true
+	BUILD_EASYREG=true
 elif [ "$VER" == "trunk" ]
 then
 	BUILD_TRUNK=true
@@ -70,5 +71,5 @@ fi
 if ${BUILD_EASYREG}
 then
 	echo "Building easyreg..."
-	build ${VOIP_DIR} "branches/easyreg"
+	build ${EASYREG_DIR} "branches/easyreg"
 fi
