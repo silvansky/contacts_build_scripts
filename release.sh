@@ -1,14 +1,16 @@
 #!/bin/sh
 
-# may be "all", "trunk", "voip"
+# may be "all", "trunk", "voip", "easyreg"
 VER=$1
 # revision
 REV=$2
 BUILD_TRUNK=false
 BUILD_VOIP=false
+BUILD_EASYREG=false
 
 TRUNK_DIR=Contacts
 VOIP_DIR=Contacts_voip
+EASYREG_DIR=Contacts_easyreg
 MAKE_BUNDLE=src/packages/macosx/make_bundle.sh
 MAKE_DMG=src/packages/macosx/make_dmg.sh
 MAKE_DMG_OPT=--nobuild
@@ -30,6 +32,9 @@ then
 elif [ "$VER" == "voip" ]
 then
 	BUILD_VOIP=true
+elif [ "$VER" == "easyreg" ]
+then
+	BUILD_EASYREG=true
 else
 	print_usage
 fi
@@ -60,4 +65,10 @@ if ${BUILD_VOIP}
 then
 	echo "Building voip..."
 	build ${VOIP_DIR} "branches/dev_pjsip"
+fi
+
+if ${BUILD_EASYREG}
+then
+	echo "Building easyreg..."
+	build ${VOIP_DIR} "branches/easyreg"
 fi
