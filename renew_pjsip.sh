@@ -5,7 +5,6 @@ then
   PJ_REPO="svn+ssh://svn@vcs.dev.rambler.ru/pjsip_mod"
   PJ_DIR="pjsip_mod"
   CONFIG_DEFINES=""
-  REVISION="HEAD"
 else
   PJ_REPO="http://svn.pjsip.org/repos/pjproject/tags/2.0-beta"
   PJ_DIR="pjproject-2.0b"
@@ -16,6 +15,11 @@ else
 #define PJMEDIA_HAS_FFMPEG_CODEC_H264 1
 #define PJMEDIA_HAS_SRTP 0
 //#define PJMEDIA_RESAMPLE_IMP  PJMEDIA_RESAMPLE_SPEEX\n"
+fi
+
+REVISION=$2
+
+if [ "$REVISION" == "" ]; then
   REVISION="HEAD"
 fi
 

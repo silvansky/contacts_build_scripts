@@ -4,6 +4,11 @@
 VER=$1
 # revision
 REV=$2
+
+if [ "$REV" == "" ]; then
+	REV="HEAD"
+fi
+
 BUILD_TRUNK=false
 BUILD_VOIP=false
 BUILD_EASYREG=false
@@ -17,7 +22,7 @@ MAKE_DMG_OPT=--nobuild
 REPO_URL=svn+ssh://svn@vcs.dev.rambler.ru/VirtusDesktop
 
 function print_usage {
-	echo "Invalid option $VER"
+	echo "Invalid options!"
 	echo "USAGE: ./release.sh [all|trunk|voip] [revision]"
 	exit 1
 }
@@ -50,7 +55,7 @@ function build {
 		svn checkout ${REPO_URL}/${REPO_PATH} $DIR
 	fi
 	cd $DIR
-svn up -r ${REV}
+	svn up -r ${REV}
 	./${MAKE_BUNDLE}
 	./${MAKE_DMG} ${MAKE_DMG_OPT}
 	cd ..
